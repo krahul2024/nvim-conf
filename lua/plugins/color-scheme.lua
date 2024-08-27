@@ -1,8 +1,14 @@
-return { 
-    "Mofiqul/vscode.nvim", name = "vscode",
+return {
+    'Mofiqul/vscode.nvim',
     config = function()
-        vim.cmd("colorscheme vscode")
-        vim.g.vscode_italic_comment = 1
-        vim.g.vscode_style = "dark"  
+        require('vscode').setup({
+            transparent = false,
+
+            italic_comments = true,
+
+            disable_nvimtree_bg = true,
+
+        })
+        vim.cmd('colorscheme vscode')
     end
 }
