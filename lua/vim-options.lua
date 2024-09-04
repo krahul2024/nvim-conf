@@ -4,6 +4,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
+vim.cmd("set relativenumber")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.neovide_font = "JetBrains Mono Nerd Font"
