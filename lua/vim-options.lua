@@ -1,4 +1,5 @@
 vim.cmd("set number")
+vim.cmd("set relativenumber")
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
@@ -9,11 +10,7 @@ vim.g.neovide_font = "JetBrains Mono Nerd Font"
 vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.keymap.set('n', '<leader>c', '"+yy', { noremap = true, silent = true })
-
-
-
-
-
+vim.keymap.set('i', 'jj', '<Esc>')
 
 
 
