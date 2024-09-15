@@ -12,8 +12,8 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.keymap.set('n', '<leader>c', '"+yy', { noremap = true, silent = true })
 vim.keymap.set('i', 'jj', '<Esc>')
-
-
+vim.keymap.set('n', '<leader>sw', '0^')
+vim.keymap.set('n', '<leader>ew', '$a')
 
 
 
