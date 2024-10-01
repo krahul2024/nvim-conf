@@ -22,7 +22,7 @@ return {
             local lspconfig = require("lspconfig")
             local servers = {
                 "tsserver", "pyright", "gopls", "jdtls", "clangd", "bashls",
-                "vimls", "sqlls", "html", "lua_ls", "solargraph"
+                "vimls", "sqlls", "html", "lua_ls", "solargraph", "rust-analyzer",
             }
 
             for _, lsp in ipairs(servers) do
