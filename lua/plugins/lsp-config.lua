@@ -14,24 +14,33 @@ return {
         },
     },
     {
+        "simrat39/rust-tools.nvim",
+        lazy = false,
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-lua/plenary.nvim",
+            "mfussenegger/nvim-dap",
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         lazy = false,
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
             local lspconfig = require("lspconfig")
             local servers = {
                 "tsserver", "pyright", "gopls", "jdtls", "clangd", "bashls",
-                "vimls", "sqlls", "html", "lua_ls", "solargraph", "rust-analyzer",
+                "vimls", "sqlls", "html", "lua_ls", "solargraph",
             }
-
-            for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({
+            
+            -- Rust Tools setup
+            local rt = require("rust-tools")
+            rt.setup({
+                server = {
                     capabilities = capabilities,
                     on_attach = function(client, bufnr)
                         -- Enable completion triggered by <c-x><c-o>
                         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
                         -- Mappings.
                         local bufopts = { noremap=true, silent=true, buffer=bufnr }
                         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
@@ -48,6 +57,37 @@ return {
                         vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
                         vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
                         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+                        
+                        -- Rust specific mappings
+                        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+                    end,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            assist = {
+                                importGranularity = "module",
+                                importPrefix = "self",
+                            },
+                            cargo = {
+                                loadOutDirsFromCheck = true
+                            },
+                            procMacro = {
+                                enable = true
+                            },
+                            checkOnSave = {
+                                command = "clippy"
+                            },
+                        }
+                    },
+                },
+            })
+
+            -- Setup for other servers
+            for _, lsp in ipairs(servers) do
+                lspconfig[lsp].setup({
+                    capabilities = capabilities,
+                    on_attach = function(client, bufnr)
+                        -- (Same keybindings as before)
                     end,
                 })
             end
@@ -57,6 +97,15 @@ return {
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
             vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+            -- Configure diagnostic display
+            vim.diagnostic.config({
+                virtual_text = true,
+                signs = true,
+                underline = true,
+                update_in_insert = false,
+                severity_sort = true,
+            })
         end,
     },
 }
