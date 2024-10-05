@@ -1,4 +1,3 @@
--- Set <space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -107,7 +106,7 @@ require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	-- Use `opts = {}` to force a plugin to be loaded.
-	{
+	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signs = {
@@ -120,15 +119,6 @@ require("lazy").setup({
 		},
 	},
 
-	{
-		"sindrets/diffview.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("diffview").setup({})
-			vim.api.nvim_set_keymap("n", "<leader>gd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>gh", ":DiffviewClose<CR>", { noremap = true, silent = true })
-		end,
-	},
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
