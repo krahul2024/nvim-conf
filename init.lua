@@ -864,6 +864,33 @@ require("lazy").setup({
 			})
 		end,
 	},
+
+	{
+		"rafamadriz/neon",
+		config = function()
+			-- Configuration options for the Neon theme
+			vim.g.neon_style = "dark" -- Options: "default", "dark", "light"
+			vim.g.neon_italic_comment = true -- Enable italic comments
+			vim.g.neon_italic_keyword = false -- Enable italic for keywords
+			vim.g.neon_italic_function = true -- Enable italic for functions
+			vim.g.neon_italic_variable = false -- Enable italic for variables
+			vim.g.neon_italic_boolean = false -- Enable italic for boolean values
+			vim.g.neon_bold = true -- Enable bold text
+			vim.g.neon_transparent = false -- Set true for transparent background
+
+			-- Set the color scheme
+			vim.cmd([[colorscheme neon]])
+
+			-- Optional: Set additional options
+			vim.opt.background = "dark" -- Set background to dark
+			vim.opt.termguicolors = true -- Enable true color support
+
+			-- Optional: Customize specific highlight groups
+			vim.api.nvim_set_hl(0, "Comment", { fg = "#5c6370", italic = true }) -- Customize comments
+			vim.api.nvim_set_hl(0, "String", { fg = "#98c379" }) -- Customize strings
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c678dd" }) -- Customize keywords
+		end,
+	},
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
