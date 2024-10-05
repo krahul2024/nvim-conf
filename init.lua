@@ -569,6 +569,22 @@ require("lazy").setup({
 					-- you can uncomment the following lines
 					--['<CR>'] = cmp.mapping.confirm { select = true },
 					--['<Tab>'] = cmp.mapping.select_next_item(),
+
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							-- If no item is selected, select the first one
+							if cmp.get_selected_entry() == nil then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							else
+								-- If an item is already selected, confirm the selection
+								cmp.confirm({ select = true })
+							end
+						elseif luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback() -- If nothing is available, fallback to default behavior
+						end
+					end, { "i", "s" }),
 					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
 					-- Manually trigger a completion from nvim-cmp.
