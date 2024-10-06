@@ -7,6 +7,17 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 
+vim.opt.tabstop = 2 -- Number of spaces that a <Tab> counts for
+vim.opt.softtabstop = 2 -- Number of spaces when editing with tabs
+vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab = true -- Convert tabs to spaces
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt.indentexpr = "custom_indent()"
+	end,
+})
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -88,6 +99,43 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+--------------- Color Scheme
+vim.cmd([[colorscheme default]])
+
+vim.opt.termguicolors = true
+vim.opt.background = "dark" -- Set background to dark, or "light" for light background
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#1c1f24" }) -- Darker cursor line
+
+-- Customizing the line numbers
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#4b545e" }) -- Darker line numbers
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#61afef", bold = true }) -- Keeping cursor line number bright for visibility
+vim.api.nvim_set_hl(0, "Comment", { fg = "#5c6370", italic = true }) -- Comment color unchanged
+
+-- Adjusting highlights for search and matching words
+vim.api.nvim_set_hl(0, "Search", { bg = "#2e333b", fg = "#e06c75", bold = true }) -- Darker search highlight
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#5c6370", fg = "#1c1f24", bold = true }) -- Duller incsearch color
+
+-- Customize strings (strings in programming languages)
+vim.api.nvim_set_hl(0, "String", { fg = "#6c9f6b" }) -- Darker green for strings
+
+-- Customize keywords (such as if, for, etc.)
+vim.api.nvim_set_hl(0, "Keyword", { fg = "#ab7bc3", bold = true }) -- Duller purple for keywords
+
+-- Customizing functions to differentiate them
+vim.api.nvim_set_hl(0, "Function", { fg = "#5fa3e0", bold = true }) -- Softer blue for functions
+
+-- Customize visual selection
+vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3f47", fg = "#ffffff" }) -- Slightly darker visual selection
+
+-- Customize matching parentheses (for better visibility)
+vim.api.nvim_set_hl(0, "MatchParen", { bg = "#e06c75", fg = "#ffffff", bold = true }) -- Keeping this bright for visibility
+
+-- Adjust the color for diagnostics, error, warnings
+vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" }) -- Error color unchanged
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#e5c07b" }) -- Warning color unchanged
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#5fa3e0" }) -- Darker info color
+vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#6c9f6b" }) -- Darker hint color
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -104,7 +152,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	-- Use `opts = {}` to force a plugin to be loaded.
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -864,34 +911,4 @@ require("lazy").setup({
 			})
 		end,
 	},
-
-	{
-		"rafamadriz/neon",
-		config = function()
-			-- Configuration options for the Neon theme
-			vim.g.neon_style = "dark" -- Options: "default", "dark", "light"
-			vim.g.neon_italic_comment = true -- Enable italic comments
-			vim.g.neon_italic_keyword = false -- Enable italic for keywords
-			vim.g.neon_italic_function = true -- Enable italic for functions
-			vim.g.neon_italic_variable = false -- Enable italic for variables
-			vim.g.neon_italic_boolean = false -- Enable italic for boolean values
-			vim.g.neon_bold = true -- Enable bold text
-			vim.g.neon_transparent = false -- Set true for transparent background
-
-			-- Set the color scheme
-			vim.cmd([[colorscheme neon]])
-
-			-- Optional: Set additional options
-			vim.opt.background = "dark" -- Set background to dark
-			vim.opt.termguicolors = true -- Enable true color support
-
-			-- Optional: Customize specific highlight groups
-			vim.api.nvim_set_hl(0, "Comment", { fg = "#5c6370", italic = true }) -- Customize comments
-			vim.api.nvim_set_hl(0, "String", { fg = "#98c379" }) -- Customize strings
-			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c678dd" }) -- Customize keywords
-		end,
-	},
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
