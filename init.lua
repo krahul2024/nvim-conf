@@ -8,8 +8,8 @@ vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> counts for
-vim.opt.softtabstop = 2 -- Number of spaces when editing with tabs
-vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vim.opt.softtabstop = 4 -- Number of spaces when editing with tabs
+vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Convert tabs to spaces
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -686,24 +686,6 @@ require("lazy").setup({
 	{ -- Collection of various small independent plugins/modules
 		"echasnovski/mini.nvim",
 		config = function()
-			-- Better Around/Inside textobjects
-			--
-			-- Examples:
-			--  - va)  - [V]isually select [A]round [)]paren
-			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-			--  - ci'  - [C]hange [I]nside [']quote
-			require("mini.ai").setup({ n_lines = 500 })
-
-			-- Add/delete/replace surroundings (brackets, quotes, etc.)
-			--
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-			-- - sd'   - [S]urround [D]elete [']quotes
-			-- - sr)'  - [S]urround [R]eplace [)] [']
-			require("mini.surround").setup()
-
-			-- Simple and easy statusline.
-			--  You could remove this setup call if you don't like it,
-			--  and try some other statusline plugin
 			local statusline = require("mini.statusline")
 			-- set use_icons to true if you have a Nerd Font
 			statusline.setup({ use_icons = vim.g.have_nerd_font })
@@ -770,99 +752,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			require("toggleterm").setup({
-				size = 20,
-				open_mapping = [[<c-\>]],
-				hide_numbers = true,
-				shade_terminals = true,
-				shading_factor = 2,
-				start_in_insert = true,
-				insert_mappings = true,
-				persist_size = true,
-				direction = "float",
-				close_on_exit = true,
-				shell = vim.o.shell,
-				float_opts = {
-					border = "curved",
-					winblend = 0,
-					highlights = {
-						border = "Normal",
-						background = "Normal",
-					},
-				},
-			})
-
-			function _G.set_terminal_keymaps()
-				local opts = { buffer = 0 }
-				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-				vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-			end
-
-			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
-			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
-			local Terminal = require("toggleterm.terminal").Terminal
-
-			-- Vertical terminal
-			local vertical_term = Terminal:new({
-				direction = "vertical",
-				size = function(term)
-					return vim.o.columns * 0.4
-				end,
-			})
-
-			function _vertical_toggle()
-				vertical_term:toggle()
-			end
-
-			-- Horizontal terminal
-			local horizontal_term = Terminal:new({
-				direction = "horizontal",
-				size = function(term)
-					return vim.o.lines * 0.3
-				end,
-			})
-
-			function _horizontal_toggle()
-				horizontal_term:toggle()
-			end
-
-			-- Floating terminal
-			local float_term = Terminal:new({
-				direction = "float",
-				float_opts = {
-					border = "double",
-				},
-			})
-
-			function _float_toggle()
-				float_term:toggle()
-			end
-
-			-- Key mappings
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>v",
-				"<cmd>lua _vertical_toggle()<CR>",
-				{ noremap = true, silent = true }
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>h",
-				"<cmd>lua _horizontal_toggle()<CR>",
-				{ noremap = true, silent = true }
-			)
-			vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>lua _float_toggle()<CR>", { noremap = true, silent = true })
-		end,
-	},
-	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = function()
@@ -909,6 +798,25 @@ require("lazy").setup({
 					end)
 					:use_key("]"),
 			})
+		end,
+	},
+	{
+		"akinsho/bufferline.nvim",
+		version = "*", -- Specify a version or keep it as "*" for the latest
+		config = function()
+			require("bufferline").setup({
+				options = {
+					numbers = "ordinal", -- Show buffer numbers
+					close_icon = "", -- Icon for close button
+					left_trunc_marker = "", -- Marker for truncated buffers on the left
+					right_trunc_marker = "", -- Marker for truncated buffers on the right
+					-- Add other options as needed
+				},
+			})
+			-- Key mappings for buffer navigation
+			vim.api.nvim_set_keymap("n", "<leader>p", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true }) -- Move to previous buffer
+			vim.api.nvim_set_keymap("n", "<leader>n", ":BufferLineCycleNext<CR>", { noremap = true, silent = true }) -- Move to next buffer
+			vim.api.nvim_set_keymap("n", "<leader>w", ":bdelete<CR>", { noremap = true, silent = true }) -- Delete current buffer
 		end,
 	},
 })
