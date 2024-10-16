@@ -104,31 +104,35 @@ vim.cmd([[colorscheme default]])
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark" -- Set background to dark, or "light" for light background
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "#1c1f24" }) -- Darker cursor line
 
--- Customizing the line numbers
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#4b545e" }) -- Darker line numbers
+-- Darker cursor line with slightly increased contrast
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2a2e36" }) -- Slightly brighter for better contrast
+
+-- Customizing the line numbers with a bit more contrast
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#5b626b" }) -- A bit brighter to make line numbers more readable
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#61afef", bold = true }) -- Keeping cursor line number bright for visibility
-vim.api.nvim_set_hl(0, "Comment", { fg = "#5c6370", italic = true }) -- Comment color unchanged
 
--- Adjusting highlights for search and matching words
-vim.api.nvim_set_hl(0, "Search", { bg = "#2e333b", fg = "#e06c75", bold = true }) -- Darker search highlight
-vim.api.nvim_set_hl(0, "IncSearch", { bg = "#5c6370", fg = "#1c1f24", bold = true }) -- Duller incsearch color
+-- Comments are a bit brighter to improve readability
+vim.api.nvim_set_hl(0, "Comment", { fg = "#7d8491", italic = true }) -- Brighter but still subtle for comments
 
--- Customize strings (strings in programming languages)
-vim.api.nvim_set_hl(0, "String", { fg = "#6c9f6b" }) -- Darker green for strings
+-- Search highlights with better visibility and balance
+vim.api.nvim_set_hl(0, "Search", { bg = "#3b414d", fg = "#d19a66", bold = true }) -- A warmer color for search highlighting
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#7d8491", fg = "#1e2227", bold = true }) -- Increased contrast for incremental search
 
--- Customize keywords (such as if, for, etc.)
-vim.api.nvim_set_hl(0, "Keyword", { fg = "#ab7bc3", bold = true }) -- Duller purple for keywords
+-- Strings with more vibrant green for better distinction
+vim.api.nvim_set_hl(0, "String", { fg = "#7ec07c" }) -- A more vibrant green for strings
 
--- Customizing functions to differentiate them
-vim.api.nvim_set_hl(0, "Function", { fg = "#5fa3e0", bold = true }) -- Softer blue for functions
+-- Keywords a bit more prominent to make them pop
+vim.api.nvim_set_hl(0, "Keyword", { fg = "#c678dd", bold = true }) -- Brighter purple for keywords
 
--- Customize visual selection
-vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3f47", fg = "#ffffff" }) -- Slightly darker visual selection
+-- Functions a bit softer but still distinctive
+vim.api.nvim_set_hl(0, "Function", { fg = "#61b2e8", bold = true }) -- Softer blue for functions
 
--- Customize matching parentheses (for better visibility)
-vim.api.nvim_set_hl(0, "MatchParen", { bg = "#e06c75", fg = "#ffffff", bold = true }) -- Keeping this bright for visibility
+-- Visual selection with slightly more contrast for visibility
+vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374", fg = "#ffffff" }) -- Brighter background for selection
+
+-- Matching parentheses more balanced and visible
+vim.api.nvim_set_hl(0, "MatchParen", { bg = "#d19a66", fg = "#ffffff", bold = true }) -- Softer but visible color for matching parentheses
 
 -- Adjust the color for diagnostics, error, warnings
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" }) -- Error color unchanged
@@ -499,50 +503,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-
-	{ -- Autoformat
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			},
-		},
-		opts = {
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
-				else
-					lsp_format_opt = "fallback"
-				end
-				return {
-					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
-				}
-			end,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use 'stop_after_first' to run the first available formatter from the list
-				-- javascript = { "prettierd", "prettier", stop_after_first = true },
-			},
-		},
-	},
-
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
