@@ -101,7 +101,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 --------------- Color Scheme
 vim.cmd([[colorscheme habamax]])
-vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374"}) -- Brighter background for selection
+vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374"})-- Set up cursor appearance with specific color and dimensions
+vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-cr:hor50,o:hor60"
+
+-- Set the cursor color to #134B70
+vim.api.nvim_set_hl(0, "Cursor", { bg = "#134B70", fg = "white" }) -- Normal mode cursor
+vim.api.nvim_set_hl(0, "lCursor", { bg = "#134B70", fg = "white" }) -- Cursor in visual mode
+
+
 
 -- Adjust the color for diagnostics, error, warnings
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" }) -- Error color unchanged
