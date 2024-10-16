@@ -100,7 +100,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 --------------- Color Scheme
-vim.api.nvim_set_hl(0, "MatchParen", { bg = "#d19a66", fg = "#ffffff", bold = true }) -- Softer but visible color for matching parentheses
+vim.cmd([[colorscheme habamax]])
+vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374"}) -- Brighter background for selection
 
 -- Adjust the color for diagnostics, error, warnings
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" }) -- Error color unchanged
