@@ -100,38 +100,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 --------------- Color Scheme
-vim.cmd([[colorscheme default]])
-
-vim.opt.termguicolors = true
-vim.opt.background = "dark" -- Set background to dark, or "light" for light background
-
--- Darker cursor line with slightly increased contrast
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2a2e36" }) -- Slightly brighter for better contrast
-
--- Customizing the line numbers with a bit more contrast
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#5b626b" }) -- A bit brighter to make line numbers more readable
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#61afef", bold = true }) -- Keeping cursor line number bright for visibility
-
--- Comments are a bit brighter to improve readability
-vim.api.nvim_set_hl(0, "Comment", { fg = "#7d8491", italic = true }) -- Brighter but still subtle for comments
-
--- Search highlights with better visibility and balance
-vim.api.nvim_set_hl(0, "Search", { bg = "#3b414d", fg = "#d19a66", bold = true }) -- A warmer color for search highlighting
-vim.api.nvim_set_hl(0, "IncSearch", { bg = "#7d8491", fg = "#1e2227", bold = true }) -- Increased contrast for incremental search
-
--- Strings with more vibrant green for better distinction
-vim.api.nvim_set_hl(0, "String", { fg = "#7ec07c" }) -- A more vibrant green for strings
-
--- Keywords a bit more prominent to make them pop
-vim.api.nvim_set_hl(0, "Keyword", { fg = "#c678dd", bold = true }) -- Brighter purple for keywords
-
--- Functions a bit softer but still distinctive
-vim.api.nvim_set_hl(0, "Function", { fg = "#61b2e8", bold = true }) -- Softer blue for functions
-
--- Visual selection with slightly more contrast for visibility
-vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374", fg = "#ffffff" }) -- Brighter background for selection
-
--- Matching parentheses more balanced and visible
 vim.api.nvim_set_hl(0, "MatchParen", { bg = "#d19a66", fg = "#ffffff", bold = true }) -- Softer but visible color for matching parentheses
 
 -- Adjust the color for diagnostics, error, warnings
