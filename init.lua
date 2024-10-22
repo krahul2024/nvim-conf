@@ -762,6 +762,12 @@ require("lazy").setup({
         config = function()
             -- Optionally configure and load the colorscheme
             -- directly inside the plugin declaration.
+            vim.g.everforest_background = 'hard'  -- 'soft', 'medium', 'hard'
+            vim.g.everforest_enable_italic = true
+            vim.g.everforest_dim_inactive_windows = 0  -- dim inactive windows
+            vim.g.everforest_italic_strings = 0  -- italic strings
+            vim.g.everforest_italic_keywords = 0  -- italic keywords
+            vim.g.everforest_transparent_background = 1  -- 0=disable, 1=enable (full), 2=only for background
             vim.g.everforest_enable_italic = true
             vim.cmd.colorscheme('everforest')
         end
