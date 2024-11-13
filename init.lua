@@ -756,20 +756,31 @@ require("lazy").setup({
         end,
     },
     {
-        'sainnhe/everforest',
-        lazy = false,
-        priority = 1000,
+        'comfysage/evergarden',
+        priority = 1000,  -- Ensure colorscheme is loaded first
+        opts = {
+            transparent_background = true,  -- Set transparent background
+            contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
+            overrides = {},  -- Add any custom overrides here
+        },
         config = function()
-            -- Optionally configure and load the colorscheme
-            -- directly inside the plugin declaration.
-            vim.g.everforest_background = 'hard'  -- 'soft', 'medium', 'hard'
-            vim.g.everforest_enable_italic = true
-            vim.g.everforest_dim_inactive_windows = 0  -- dim inactive windows
-            vim.g.everforest_italic_strings = 0  -- italic strings
-            vim.g.everforest_italic_keywords = 0  -- italic keywords
-            vim.g.everforest_transparent_background = 1  -- 0=disable, 1=enable (full), 2=only for background
-            vim.g.everforest_enable_italic = true
-            vim.cmd.colorscheme('everforest')
+            -- Apply the Evergarden theme
+            vim.cmd('colorscheme evergarden')
+
+            -- Optional: Customize the theme with options
+            vim.g.evergarden_transparent_background = true  -- Enable transparent background
+            vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
         end
     },
 })
+
+-- Set up Visual mode appearance with specific background and white text color
+vim.api.nvim_set_hl(0, "Visual", { bg = "#003161", fg = "white" })  -- Set white text in visual mode
+
+-- Set up cursor appearance with specific color and dimensions
+vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-cr:hor50,o:hor60"
+
+-- Set the cursor color to #134B70
+vim.api.nvim_set_hl(0, "Cursor", { bg = "#003161", fg = "white" })  -- Normal mode cursor with solid color
+vim.api.nvim_set_hl(0, "lCursor", { bg = "#243642", fg = "white" })  -- Cursor in visual mode with different color
+
