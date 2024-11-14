@@ -764,23 +764,18 @@ require("lazy").setup({
             overrides = {},  -- Add any custom overrides here
         },
         config = function()
-            -- Apply the Evergarden theme
             vim.cmd('colorscheme evergarden')
 
-            -- Optional: Customize the theme with options
             vim.g.evergarden_transparent_background = true  -- Enable transparent background
             vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
         end
     },
 })
 
--- Set up Visual mode appearance with specific background and white text color
-vim.api.nvim_set_hl(0, "Visual", { bg = "#003161", fg = "white" })  -- Set white text in visual mode
-
--- Set up cursor appearance with specific color and dimensions
+vim.api.nvim_set_hl(0, "Visual", { bg = "#003161", fg = 'white'})-- Set up cursor appearance with specific color and dimensions
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-cr:hor50,o:hor60"
 
 -- Set the cursor color to #134B70
-vim.api.nvim_set_hl(0, "Cursor", { bg = "#003161", fg = "white" })  -- Normal mode cursor with solid color
-vim.api.nvim_set_hl(0, "lCursor", { bg = "#243642", fg = "white" })  -- Cursor in visual mode with different color
+vim.api.nvim_set_hl(0, "Cursor", { bg = "#384BA0", fg="white"}) -- Normal mode cursor
+vim.api.nvim_set_hl(0, "lCursor", { bg = "#134B70", fg = "white" }) -- Cursor in visual mode
 
