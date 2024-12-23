@@ -1,16 +1,16 @@
-vim.g.mapleader = " "
+vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 
-vim.opt.tabstop = 4 -- Number of spaces that a <Tab> counts for
+vim.opt.tabstop     = 4 -- Number of spaces that a <Tab> counts for
 vim.opt.softtabstop = 4 -- Number of spaces when editing with tabs
-vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.shiftwidth  = 4 -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab   = true -- Convert tabs to spaces
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 --------------- Color Scheme
-vim.cmd([[colorscheme habamax]])
+vim.cmd([[colorscheme default]])
 vim.api.nvim_set_hl(0, "Visual", { bg = "#5c6374"})-- Set up cursor appearance with specific color and dimensions
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-cr:hor50,o:hor60"
 
@@ -647,6 +647,7 @@ require("lazy").setup({
             ensure_installed = {
                 "bash",
                 "c",
+                "cpp",
                 "diff",
                 "html",
                 "lua",
@@ -756,20 +757,41 @@ require("lazy").setup({
         end,
     },
     {
-        'comfysage/evergarden',
-        priority = 1000,  -- Ensure colorscheme is loaded first
-        opts = {
-            transparent_background = true,  -- Set transparent background
-            contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
-            overrides = {},  -- Add any custom overrides here
-        },
+        "godlygeek/tabular",
+        lazy = false,
         config = function()
-            vim.cmd('colorscheme evergarden')
-
-            vim.g.evergarden_transparent_background = true  -- Enable transparent background
-            vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
-        end
+            -- Key mappings for alignment
+            vim.keymap.set("n", "<leader>a=", ":Tabularize/=", { desc = "Align by equal sign" })
+            vim.keymap.set("n", "<leader>a|", ":Tabularize/|", { desc = "Align by pipe symbol" })
+            vim.keymap.set("v", "<leader>ac", ":Tabularize/:\\s", { desc = "Align by colon with space" }) -- Visual mode
+        end,
     },
+    -- {
+    --     'comfysage/evergarden',
+    --     priority = 1000,  -- Ensure colorscheme is loaded first
+    --     opts = {
+    --         transparent_background = true,  -- Set transparent background
+    --         contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
+    --         overrides = {},  -- Add any custom overrides here
+    --     },
+    --     config = function()
+    -- --        vim.cmd('colorscheme evergarden')
+    --
+    --         vim.g.evergarden_transparent_background = true  -- Enable transparent background
+    --         vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
+    --     end
+    -- },
+    -- {
+    --     'NLKNguyen/papercolor-theme',
+    --     priority = 1000,  -- Ensure colorscheme is loaded first
+    --     config = function()
+    --         -- Set the colorscheme
+    --         vim.cmd('colorscheme PaperColor')
+    --
+    --         -- Configure additional options
+    --         vim.o.background = 'dark'  -- or 'light' for light mode
+    --     end
+    -- },
 })
 
 vim.api.nvim_set_hl(0, "Visual", { bg = "#003161", fg = 'white'})-- Set up cursor appearance with specific color and dimensions
