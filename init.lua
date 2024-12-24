@@ -801,3 +801,9 @@ vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-c
 vim.api.nvim_set_hl(0, "Cursor", { bg = "#384BA0", fg="white"}) -- Normal mode cursor
 vim.api.nvim_set_hl(0, "lCursor", { bg = "#134B70", fg = "white" }) -- Cursor in visual mode
 
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
