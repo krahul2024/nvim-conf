@@ -680,6 +680,14 @@ require("lazy").setup({
         },
         config = function()
             require("neo-tree").setup({
+                default_component_configs = {
+                    icon = {
+                        folder_closed = "▶",
+                        folder_open = "▼",
+                        folder_empty = " ",
+                        default = " ",
+                    },
+                },
                 window = {
                     position = "right",
                 },
@@ -766,32 +774,21 @@ require("lazy").setup({
             vim.keymap.set("v", "<leader>ac", ":Tabularize/:\\s", { desc = "Align by colon with space" }) -- Visual mode
         end,
     },
-    -- {
-    --     'comfysage/evergarden',
-    --     priority = 1000,  -- Ensure colorscheme is loaded first
-    --     opts = {
-    --         transparent_background = true,  -- Set transparent background
-    --         contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
-    --         overrides = {},  -- Add any custom overrides here
-    --     },
-    --     config = function()
-    -- --        vim.cmd('colorscheme evergarden')
-    --
-    --         vim.g.evergarden_transparent_background = true  -- Enable transparent background
-    --         vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
-    --     end
-    -- },
-    -- {
-    --     'NLKNguyen/papercolor-theme',
-    --     priority = 1000,  -- Ensure colorscheme is loaded first
-    --     config = function()
-    --         -- Set the colorscheme
-    --         vim.cmd('colorscheme PaperColor')
-    --
-    --         -- Configure additional options
-    --         vim.o.background = 'dark'  -- or 'light' for light mode
-    --     end
-    -- },
+    {
+        'comfysage/evergarden',
+        priority = 1000,  -- Ensure colorscheme is loaded first
+        opts = {
+            transparent_background = true,  -- Set transparent background
+            contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
+            overrides = {},  -- Add any custom overrides here
+        },
+        config = function()
+            vim.cmd('colorscheme evergarden')
+
+            vim.g.evergarden_transparent_background = true  -- Enable transparent background
+            vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
+        end
+    },
 })
 
 vim.api.nvim_set_hl(0, "Visual", { bg = "#003161", fg = 'white'})-- Set up cursor appearance with specific color and dimensions
@@ -800,6 +797,7 @@ vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-c
 -- Set the cursor color to #134B70
 vim.api.nvim_set_hl(0, "Cursor", { bg = "#384BA0", fg="white"}) -- Normal mode cursor
 vim.api.nvim_set_hl(0, "lCursor", { bg = "#134B70", fg = "white" }) -- Cursor in visual mode
+vim.opt.fillchars:append({ eob = " " })
 
 vim.cmd [[
   highlight Normal guibg=none
@@ -807,3 +805,4 @@ vim.cmd [[
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
 ]]
+
