@@ -789,36 +789,33 @@ require("lazy").setup({
     --         vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
     --     end
     -- },
-
     {
         'rebelot/kanagawa.nvim',
         priority = 1000,
-        opts = {
-            transparent = true,
-            theme = "dragon",
-            background = {
-                dark = "dragon",
-                light = "lotus"
-            },
-            overrides = function(colors)
-                return {
-                    Comment = { fg = colors.palette.sakuraPink, italic = true }
-                }
-            end,
-        },
         config = function()
             require('kanagawa').setup({
-                -- transparent = true,
+                compile = false,
+                undercurl = true,
+                commentStyle = { italic = true },
+                functionStyle = {},
+                keywordStyle = { italic = true},
+                statementStyle = { bold = true },
+                typeStyle = {},
+                transparent = false,
+                dimInactive = false,
+                terminalColors = true,
+                colors = {
+                    palette = {},
+                    theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+                },
+                overrides = function(colors)
+                    return {}
+                end,
                 theme = "dragon",
                 background = {
                     dark = "dragon",
                     light = "lotus"
                 },
-                overrides = function(colors)
-                    return {
-                        Comment = { fg = colors.palette.sakuraPink, italic = true },
-                    }
-                end,
             })
 
             vim.cmd('colorscheme kanagawa')
@@ -840,4 +837,4 @@ vim.opt.fillchars:append({ eob = " " })
 --   highlight Normal ctermbg=none
 --   highlight NonText ctermbg=none
 -- ]]
-
+--
