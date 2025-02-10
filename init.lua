@@ -827,9 +827,9 @@ require("lazy").setup({
         priority = 1000, -- Load before other plugins
         config = function()
             require("onedark").setup({
-                style = "cool",  -- Options: 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
+                style = "dark",  -- Options: 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
                 transparent = true,
-                term_colors = true,  -- Use terminal colors
+                term_colors = false,  -- Use terminal colors
                 code_style = {
                     comments = "italic",
                     keywords = "bold",
