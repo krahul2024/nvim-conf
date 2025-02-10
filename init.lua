@@ -789,36 +789,59 @@ require("lazy").setup({
     --         vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
     --     end
     -- },
+    -- {
+    --     'rebelot/kanagawa.nvim',
+    --     priority = 1000,
+    --     config = function()
+    --         require('kanagawa').setup({
+    --             compile = false,
+    --             undercurl = true,
+    --             commentStyle = { italic = true },
+    --             functionStyle = {},
+    --             keywordStyle = { italic = true},
+    --             statementStyle = { bold = true },
+    --             typeStyle = {},
+    --             transparent = false,
+    --             dimInactive = false,
+    --             terminalColors = true,
+    --             colors = {
+    --                 palette = {},
+    --                 theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    --             },
+    --             overrides = function(colors)
+    --                 return {}
+    --             end,
+    --             theme = "dragon",
+    --             background = {
+    --                 dark = "dragon",
+    --                 light = "lotus"
+    --             },
+    --         })
+    --
+    --         vim.cmd('colorscheme kanagawa')
+    --     end,
+    -- },
     {
-        'rebelot/kanagawa.nvim',
-        priority = 1000,
+        "navarasu/onedark.nvim",
+        lazy = false, -- Load immediately
+        priority = 1000, -- Load before other plugins
         config = function()
-            require('kanagawa').setup({
-                compile = false,
-                undercurl = true,
-                commentStyle = { italic = true },
-                functionStyle = {},
-                keywordStyle = { italic = true},
-                statementStyle = { bold = true },
-                typeStyle = {},
-                transparent = false,
-                dimInactive = false,
-                terminalColors = true,
-                colors = {
-                    palette = {},
-                    theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+            require("onedark").setup({
+                style = "cool",  -- Options: 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
+                transparent = true,
+                term_colors = true,  -- Use terminal colors
+                code_style = {
+                    comments = "italic",
+                    keywords = "bold",
+                    functions = "bold",
+                    strings = "none",
+                    variables = "none"
                 },
-                overrides = function(colors)
-                    return {}
-                end,
-                theme = "dragon",
-                background = {
-                    dark = "dragon",
-                    light = "lotus"
-                },
+                lualine = {
+                    transparent = true,  -- Make lualine match the theme
+                }
             })
-
-            vim.cmd('colorscheme kanagawa')
+            require("onedark").load()
         end,
     }
 })
