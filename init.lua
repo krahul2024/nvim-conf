@@ -703,6 +703,69 @@ require("lazy").setup({
                     right_trunc_marker = "", -- Marker for truncated buffers on the right
                     -- Add other options as needed
                 },
+                highlights = {
+                    -- Make backgrounds transparent/adaptive
+                    fill = {
+                        bg = "none", -- Transparent background for the fill area
+                    },
+                    background = {
+                        bg = "none", -- Transparent background for inactive buffers
+                    },
+                    buffer_selected = {
+                        bg = "none", -- Transparent background for active buffer
+                        bold = true,
+                        italic = false,
+                    },
+                    buffer_visible = {
+                        bg = "none", -- Transparent background for visible buffers
+                    },
+                    close_button = {
+                        bg = "none",
+                    },
+                    close_button_selected = {
+                        bg = "none",
+                    },
+                    close_button_visible = {
+                        bg = "none",
+                    },
+                    -- Make text larger by using bold and potentially adjusting font
+                    tab = {
+                        bg = "none",
+                        bold = true, -- Makes text appear larger/more prominent
+                    },
+                    tab_selected = {
+                        bg = "none",
+                        bold = true,
+                    },
+                    tab_close = {
+                        bg = "none",
+                    },
+                    -- Additional elements with transparent backgrounds
+                    separator = {
+                        bg = "none",
+                    },
+                    separator_selected = {
+                        bg = "none",
+                    },
+                    separator_visible = {
+                        bg = "none",
+                    },
+                    indicator_selected = {
+                        bg = "none",
+                    },
+                    pick = {
+                        bg = "none",
+                        bold = true,
+                    },
+                    pick_selected = {
+                        bg = "none",
+                        bold = true,
+                    },
+                    pick_visible = {
+                        bg = "none",
+                        bold = true,
+                    },
+                },
             })
             -- Key mappings for buffer navigation
             vim.api.nvim_set_keymap("n", "<leader>p", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true }) -- Move to previous buffer
