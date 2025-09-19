@@ -798,93 +798,23 @@ require("lazy").setup({
             vim.keymap.set("v", "<leader>ac", ":Tabularize/:\\s", { desc = "Align by colon with space" }) -- Visual mode
         end,
     },
-    -- {
-    --     'comfysage/evergarden',
-    --     priority = 1000,  -- Ensure colorscheme is loaded first
-    --     opts = {
-    --         transparent_background = true,  -- Set transparent background
-    --         contrast_dark = 'hard',  -- Options: 'hard', 'medium', 'soft'
-    --         overrides = {},  -- Add any custom overrides here
-    --     },
-    --     config = function()
-    --         vim.cmd('colorscheme evergarden')
-    --
-    --         vim.g.evergarden_transparent_background = true  -- Enable transparent background
-    --         vim.g.evergarden_contrast_dark = 'medium'  -- Set the contrast for dark mode
-    --     end
-    -- },
-    -- {
-    --     'rebelot/kanagawa.nvim',
-    --     priority = 1000,
-    --     config = function()
-    --         require('kanagawa').setup({
-    --             compile = false,
-    --             undercurl = true,
-    --             commentStyle = { italic = true },
-    --             functionStyle = {},
-    --             keywordStyle = { italic = true},
-    --             statementStyle = { bold = true },
-    --             typeStyle = {},
-    --             transparent = false,
-    --             dimInactive = false,
-    --             terminalColors = true,
-    --             colors = {
-    --                 palette = {},
-    --                 theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-    --             },
-    --             overrides = function(colors)
-    --                 return {}
-    --             end,
-    --             theme = "dragon",
-    --             background = {
-    --                 dark = "dragon",
-    --                 light = "lotus"
-    --             },
-    --         })
-    --
-    --         vim.cmd('colorscheme kanagawa')
-    --     end,
-    -- },
-    -- {
-    --     "navarasu/onedark.nvim",
-    --     lazy = false, -- Load immediately
-    --     priority = 1000, -- Load before other plugins
-    --     config = function()
-    --         require("onedark").setup({
-    --             style = "dark",  -- Options: 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
-    --             transparent = true,
-    --             term_colors = false,  -- Use terminal colors
-    --             code_style = {
-    --                 comments = "italic",
-    --                 keywords = "bold",
-    --                 functions = "bold",
-    --                 strings = "none",
-    --                 variables = "none"
-    --             },
-    --             lualine = {
-    --                 transparent = true,  -- Make lualine match the theme
-    --             }
-    --         })
-    --         require("onedark").load()
-    --     end,
-    -- },
-    -- {
-    --     "shaunsingh/nord.nvim",
-    --     lazy = false, -- Load immediately
-    --     priority = 1000, -- Load before other plugins
-    --     config = function()
-    --         vim.g.nord_contrast = true       -- Brighter background for sidebars and popups
-    --         vim.g.nord_borders = false       -- Enable borders between verticaly split windows
-    --         vim.g.nord_disable_background = true  -- Transparent background
-    --         vim.g.nord_cursorline_transparent = true
-    --         vim.g.nord_enable_sidebar_background = false
-    --         vim.g.nord_italic = true
-    --         vim.g.nord_uniform_diff_background = true
-    --         vim.g.nord_bold = false
-    --
-    --         vim.cmd.colorscheme("nord")
-    --     end,
-    -- },
+    {
+        "shaunsingh/nord.nvim",
+        lazy = false, -- Load immediately
+        priority = 1000, -- Load before other plugins
+        config = function()
+            vim.g.nord_contrast = true       -- Brighter background for sidebars and popups
+            vim.g.nord_borders = false       -- Enable borders between verticaly split windows
+            vim.g.nord_disable_background = true  -- Transparent background
+            vim.g.nord_cursorline_transparent = true
+            vim.g.nord_enable_sidebar_background = false
+            vim.g.nord_italic = true
+            vim.g.nord_uniform_diff_background = true
+            vim.g.nord_bold = false
+
+            vim.cmd.colorscheme("nord")
+        end,
+    },
     -- {
     --     'everviolet/nvim', name = 'evergarden',
     --     priority = 1000,
@@ -895,7 +825,7 @@ require("lazy").setup({
     --                 accent = 'green',     -- accent color choice
     --             },
     --             editor = {
-    --                 transparent_background = false,
+    --                 transparent_background = true,
     --                 override_terminal = true,
     --                 sign = { color = 'none' },
     --                 float = {
@@ -909,9 +839,10 @@ require("lazy").setup({
     --             style = {
     --                 tabline = { 'reverse' },
     --                 search = { 'italic', 'reverse' },
+    --                 functions = { 'bold' },
     --                 incsearch = { 'italic', 'reverse' },
-    --                 types = { 'italic' },
-    --                 keyword = { 'italic' },
+    --                 types = { 'bold' },
+    --                 keyword = {},
     --                 comment = { 'italic' },
     --             },
     --             overrides = {},
@@ -920,88 +851,130 @@ require("lazy").setup({
     --         vim.cmd('colorscheme evergarden')
     --     end,
     -- },
-    --
     -- {
-    --     'marko-cerovac/material.nvim',
-    --     priority = 1000,
+    --     "nvimdev/zephyr-nvim",
+    --     lazy = false,          -- load immediately
+    --     priority = 1000,       -- make sure it loads before other plugins
     --     config = function()
-    --         require('material').setup({
+    --         vim.cmd.colorscheme("zephyr")
+    --     end,
+    -- },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {
+    --         style = "night", -- choices: "storm", "night", "moon", "day"
+    --         transparent = true, -- removes background
+    --         styles = {
+    --             comments = { italic = true },
+    --             keywords = { bold = true },
+    --             functions = { bold = true },
+    --             variables = { bold = false },
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("tokyonight").setup(opts)
+    --         vim.cmd.colorscheme("tokyonight")
+    --     end,
+    -- },
+    -- {
+    --     "rebelot/kanagawa.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {
+    --         transparent = true,
+    --         styles = {
+    --             comments = { italic = true },
+    --             keywords = { bold = true },
+    --             functions = { bold = true },
+    --             variables = { bold = false },
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("kanagawa").setup(opts)
+    --         vim.cmd.colorscheme("kanagawa")
+    --     end,
+    -- },
+    -- {
+    --     "EdenEast/nightfox.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {
+    --         options = {
+    --             transparent = true,
     --             styles = {
-    --                 comments = { italic = true },
-    --                 functions = { italic = true },
+    --                 comments = "italic",
+    --                 keywords = "bold",
+    --                 functions = "bold",
+    --                 variables = "NONE",
     --             },
-    --
-    --             plugins = {
-    --                 "telescope",
-    --                 "nvim-cmp",
-    --                 "nvim-tree",
-    --                 "gitsigns",
-    --                 "indent-blankline",
-    --             },
-    --
-    --             lualine_style = "stealth", -- Lualine style (can be 'stealth' or 'default')
-    --             async_loading = true, -- Load parts of the theme asyncronously for faster startup
-    --         })
-    --
-    --         -- Available styles: 'darker', 'lighter', 'oceanic', 'palenight', 'deep ocean'
-    --         vim.g.material_style = "deep ocean"
-    --         vim.cmd("colorscheme material")
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("nightfox").setup(opts)
+    --         vim.cmd.colorscheme("nightfox")
+    --     end,
+    -- },
+    -- {
+    --     "Mofiqul/dracula.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {
+    --         transparent_bg = true,
+    --         italic_comment = true,
+    --         styles = {
+    --             keywords = { bold = true },
+    --             functions = { bold = true },
+    --             variables = { bold = false },
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("dracula").setup(opts)
+    --         vim.cmd.colorscheme("dracula")
     --     end,
     -- },
 {
-    'AlexvZyl/nordic.nvim',
-    priority = 1000,
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
-    config = function()
-        require('nordic').setup({
-            -- Customization options
-            transparent_bg = true,    -- Enable transparent background
-            italic_comments = true,    -- Italicize comments
-            cursorline = {
-                transparent = false,   -- Transparent cursorline
-            },
-            noice = {
-                style = 'classic',     -- Style for noice.nvim (classic/flat)
-            },
-            telescope = {
-                style = 'classic',     -- Style for telescope (classic/flat)
-            },
-            leap = {
-                dim_backdrop = true,   -- Dim backdrop when using leap.nvim
-            },
-            ts_context = {
-                enabled = true,        -- Enable treesitter context highlighting
-            },
-
-            -- Plugin integrations
-            plugins = {
-                'cmp',
-                'gitsigns',
-                'telescope',
-                'treesitter',
-                'indent-blankline',
-                'lsp',
-                'mason',
-                'neo-tree',
-            },
-        })
-
-        vim.cmd.colorscheme('nordic')
+    priority = 1000,
+    opts = {
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        transparent_background = true,
+        styles = {
+            comments = { "italic" },
+            keywords = { "bold" },
+            functions = { "bold" },
+            variables = {},
+        },
+    },
+    config = function(_, opts)
+        require("catppuccin").setup(opts)
+        vim.cmd.colorscheme("catppuccin") -- << no -mocha here
     end,
-},
+}
 })
 
-vim.api.nvim_set_hl(0, "Visual", { bg = "#003121", fg = 'white'})-- Set up cursor appearance with specific color and dimensions
+-- Keep your existing setup
+vim.api.nvim_set_hl(0, "Visual", { bg = "#003121", fg = 'white'})
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor,i-ci-ve:ver40-Cursor/lCursor,r-cr:hor50,o:hor60"
 
 -- Set the cursor color to #134B70
 vim.api.nvim_set_hl(0, "Cursor", { bg = "#384BA0", fg="white"}) -- Normal mode cursor
 vim.api.nvim_set_hl(0, "lCursor", { bg = "#134B70", fg = "white" }) -- Cursor in visual mode
 vim.opt.fillchars:append({ eob = " " })
---
+
 vim.cmd [[
   highlight Normal guibg=none
   highlight NonText guibg=none
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
 ]]
+
+-- >>> Add underline for search highlights <<<
+-- Normal search match
+vim.api.nvim_set_hl(0, "Search", { underline = true })
+
+-- Incremental search (when typing)
+vim.api.nvim_set_hl(0, "IncSearch", { underline = true })
