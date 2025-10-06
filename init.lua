@@ -798,23 +798,6 @@ require("lazy").setup({
             vim.keymap.set("v", "<leader>ac", ":Tabularize/:\\s", { desc = "Align by colon with space" }) -- Visual mode
         end,
     },
-    {
-        "shaunsingh/nord.nvim",
-        lazy = false, -- Load immediately
-        priority = 1000, -- Load before other plugins
-        config = function()
-            vim.g.nord_contrast = true       -- Brighter background for sidebars and popups
-            vim.g.nord_borders = false       -- Enable borders between verticaly split windows
-            vim.g.nord_disable_background = true  -- Transparent background
-            vim.g.nord_cursorline_transparent = true
-            vim.g.nord_enable_sidebar_background = false
-            vim.g.nord_italic = true
-            vim.g.nord_uniform_diff_background = true
-            vim.g.nord_bold = false
-
-            vim.cmd.colorscheme("nord")
-        end,
-    },
     -- {
     --     'everviolet/nvim', name = 'evergarden',
     --     priority = 1000,
@@ -917,43 +900,56 @@ require("lazy").setup({
     --     end,
     -- },
     -- {
-    --     "Mofiqul/dracula.nvim",
-    --     lazy = false,
+    --     'wtfox/jellybeans.nvim',
     --     priority = 1000,
+    --     lazy = false,
     --     opts = {
-    --         transparent_bg = true,
-    --         italic_comment = true,
-    --         styles = {
-    --             keywords = { bold = true },
-    --             functions = { bold = true },
-    --             variables = { bold = false },
+    --         transparent = true,
+    --         italics = true,
+    --         bold     = true,
+    --         flat_ui  = true,
+    --         background = {
+    --             dark  = "jellybeans",          -- default dark palette
+    --             light = "jellybeans_light",    -- default light variant
     --         },
+    --         plugins = {
+    --             all  = false,
+    --             auto = true, -- auto apply colors to plugins that are installed
+    --         },
+    --         on_colors = function(colors)
+    --             -- optional: tweak custom accent colors, etc.
+    --             -- colors.<some_color_name> = "#abcdef"
+    --         end,
+    --         on_highlights = function(hl, colors)
+    --             -- optional: override specific highlight groups
+    --             -- e.g., override cursorline, comment styles, etc.
+    --             hl.Comment = { italic = true, fg = colors.fg_comment or colors.comment }
+    --             hl.CursorLine = { bg = "NONE" }
+    --             -- etc.
+    --         end,
     --     },
     --     config = function(_, opts)
-    --         require("dracula").setup(opts)
-    --         vim.cmd.colorscheme("dracula")
+    --         require("jellybeans").setup(opts)
+    --         vim.cmd.colorscheme( (vim.o.background == "light") and opts.background.light or opts.background.dark )
     --     end,
     -- },
-{
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
-    priority = 1000,
-    opts = {
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
-        transparent_background = true,
-        styles = {
-            comments = { "italic" },
-            keywords = { "bold" },
-            functions = { "bold" },
-            variables = {},
+    {
+        "dgox16/oldworld.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            transparent = true,
+            styles = {
+                functions = { bold = true },
+                keywords = { bold = true },
+                types = { bold = true },
+            },
         },
-    },
-    config = function(_, opts)
-        require("catppuccin").setup(opts)
-        vim.cmd.colorscheme("catppuccin") -- << no -mocha here
-    end,
-}
+        config = function(_, opts)
+            require("oldworld").setup(opts)
+            vim.cmd.colorscheme("oldworld")
+        end,
+    }
 })
 
 -- Keep your existing setup
@@ -972,9 +968,5 @@ vim.cmd [[
   highlight NonText ctermbg=none
 ]]
 
--- >>> Add underline for search highlights <<<
--- Normal search match
 vim.api.nvim_set_hl(0, "Search", { underline = true })
-
--- Incremental search (when typing)
 vim.api.nvim_set_hl(0, "IncSearch", { underline = true })
